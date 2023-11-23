@@ -1,28 +1,43 @@
 #include "Relay_Motors.h"
 #include "Ultrasonic_Sensor.h"
-
+#include "Sensor.h"
+#include "line_finder.h"
 // Pin 4 7 8 12 reserver pour le realy
-// Pin 9 10 pour ultrasonic sensor                         
+// Pin Sl Sa   for distance sensor.                     
 
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(9600);
+  
+  setup_Sensor();
    setup_Motors();
+   lineSetup();
+
 }
 
 
 void loop() {
-  // stopMotors();
-  // delay(1000);
-  // motorsForward(500);
-  // delay(500);
-  // motorsRigth(500);
-  // delay(500);
-  // motorsLeft(500);
-  // delay(500);
-  // motorsBackward(500);
-  // delay(500);
-  int lecture;
-  lecture = read_Distance();
-  delay(1000);
+
+ 
+
+  //  int lecture;
+  // lecture = read_Distance();
+  if (detect()){
+  if(  lineFinder1()){
+     motorsForward();
+
+  }
+  else if( lineFinder2()) { 
+    motorsRigth(); 
+                                
+  }   
+  else if(lineFinder3()) {
+    motorsLeft();
+    
+    // while(lineFinder3())Serial.println("test1");
+  }else{
+    stopMotors();
+    }
+  }else stopMotors(); 
+    
+  
 }

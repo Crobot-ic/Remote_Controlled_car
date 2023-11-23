@@ -103,6 +103,7 @@ void motorsRigth(int time){
   motorsRigth();
   delay(time);
   stopMotors();
+  
 }
 
 void motorsLeft(){
